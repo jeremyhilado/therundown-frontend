@@ -1,1 +1,13 @@
+@import './_config';
 
+.home-page {
+    display: flex;
+    justify-content: center;
+    .card-body {
+        width: 60vw;
+    }
+    #home-title {
+        text-align: center;
+        margin: 100px 0 100px 0;
+    }
+}

@@ -58,7 +58,7 @@ export const createBusiness = async(business, token) => {
 
 export const updateBusiness = async(id, business, token) => {
     try {
-        const res = await api.patch(`/api/businesses/${id}`, business, {
+        const res = await api.patch(`/api/businesses/${id}/`, business, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -73,7 +73,7 @@ export const updateBusiness = async(id, business, token) => {
 
 export const deleteBusiness = async (id, token) => {
     try {
-        const res = await api.delete(`/api/businesses/${id}`, {
+        const res = await api.delete(`/api/businesses/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -116,7 +116,7 @@ export const createReview = async (review, token) => {
 
 export const updateReview = async (id, review, token) => {
     try {
-        const res = await api.patch(`/api/reviews/${id}`, {
+        const res = await api.patch(`/api/reviews/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -130,7 +130,7 @@ export const updateReview = async (id, review, token) => {
 
 export const deleteReview = async (id, token) => {
     try {
-        const res = await api.delete(`/api/reviews/${id}`, {
+        const res = await api.delete(`/api/reviews/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -174,7 +174,7 @@ export const createImage = async (image, token) => {
 
 export const updateImage = async (id, image, token) => {
     try {
-        const res = await api.patch(`/api/images/${id}`, {
+        const res = await api.patch(`/api/images/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -189,7 +189,7 @@ export const updateImage = async (id, image, token) => {
 
 export const deleteImage = async (id, token) => {
     try {
-        const res = await api.delete(`/api/images/${id}`, {
+        const res = await api.delete(`/api/images/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }
