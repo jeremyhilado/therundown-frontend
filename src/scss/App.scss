@@ -1,18 +1,33 @@
 @import './_config';
 
-.home-page {
+.login-page {
     display: flex;
     justify-content: center;
     .card-body {
         width: 60vw;
-        height: 400px;
-    }
-    #home-title {
-        text-align: center;
-        margin: 100px 0 50px 0;
+        height: 425px;
     }
     form {
         padding-top: 20px;
+    }
+}
+
+#site-title {
+    text-align: center;
+    margin: 100px 0 50px 0;
+}
+
+.signup-page {
+    display: flex;
+    justify-content: center;
+    .card-body {
+        width: 60vw;
+        height: 710px;
+    }
+    padding-bottom: 30px;
+    .signup-error {
+        margin-bottom: 0;
+        color: red;
     }
 }
 

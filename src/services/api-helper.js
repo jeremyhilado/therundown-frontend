@@ -21,7 +21,7 @@ export const register = async (user) => {
         return res
     }
     catch (err) {
-        console.log(err)
+        //console.log(err.response.data)
         return err
     }
 }

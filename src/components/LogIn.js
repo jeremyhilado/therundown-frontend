@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../scss/App.scss';
 import {Link, Redirect} from 'react-router-dom'
 import {MDBRow, MDBCol, MDBInput, MDBCard, MDBCardBody, MDBBtn} from 'mdbreact'
 import {login} from '../services/api-helper'
@@ -14,7 +13,7 @@ function LogIn(props) {
     password: ''
   })
   const [verified, setVerified] = useState(false)
-  const [alert, setAlert] = useState(false)
+  const [errorAlert, setErrorAlert] = useState(false)
 
   const handleLoginChange = e => {
     const value = e.target.value
@@ -29,20 +28,20 @@ function LogIn(props) {
         localStorage.setItem('user', JSON.stringify(res.data))
         setVerified(true)
       } else {
-        setAlert(true)
+        setErrorAlert(true)
       }
     })
   }
 
   return (
-    <div className='home-page'>
+    <div className='login-page'>
       <MDBRow>
         <MDBCol>
-          <h1 id='home-title'>The Rundown</h1>
+          <h1 id='site-title'>The Rundown</h1>
           <MDBCard>
             <MDBCardBody>
               <p className='text-center'>Log In</p>
-              {alert && <p className='text-center' style={{color: 'red'}}>A user with that username and password was not found.</p>}
+              {errorAlert && <p className='text-center' style={{color: 'red'}}>A user with that username and password was not found.</p>}
               <form onSubmit={handleLoginSubmit}>
                 <MDBInput
                   label='Username'
