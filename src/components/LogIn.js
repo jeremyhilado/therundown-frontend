@@ -12,7 +12,7 @@ function LogIn(props) {
     username: '',
     password: ''
   })
-  const [verified, setVerified] = useState(false)
+  
   const [errorAlert, setErrorAlert] = useState(false)
 
   const handleLoginChange = e => {
@@ -26,7 +26,7 @@ function LogIn(props) {
       if(res.status === 200) {
         props.setUser(res.data)
         localStorage.setItem('user', JSON.stringify(res.data))
-        setVerified(true)
+        props.setVerified(true)
       } else {
         setErrorAlert(true)
       }
@@ -70,7 +70,7 @@ function LogIn(props) {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      {verified && <Redirect to='/projects/jhilado/the-rundown/dashboard' />}
+      {props.verified && <Redirect to='/projects/jhilado/the-rundown/dashboard' />}
     </div>
   );
 }
