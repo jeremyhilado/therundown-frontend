@@ -33,7 +33,6 @@ function Main() {
 
     return(
 			<div>
-				<Navbar />
 				<Switch>
 					<Route exact path='/projects/jhilado/the-rundown'><LogIn setUser={setUser} setVerified={setVerified} verified={verified} /></Route>
 					<Route exact path='/projects/jhilado/the-rundown/signup'><SignUp /></Route>

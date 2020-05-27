@@ -47,6 +47,11 @@
     margin-right: 90px;
 }
 
+.dashboard-card {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
 @media(min-width: 769px) {
     #login-btn {
         width: 20vw;
