@@ -5,9 +5,27 @@
     justify-content: center;
     .card-body {
         width: 60vw;
+        height: 400px;
     }
     #home-title {
         text-align: center;
-        margin: 100px 0 100px 0;
+        margin: 100px 0 50px 0;
+    }
+    form {
+        padding-top: 20px;
+    }
+}
+
+#login-btn {
+    border-radius: 30px;
+    width: 30vw;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+@media(min-width: 769px) {
+    #login-btn {
+        width: 20vw;
     }
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'https://jeremh-yelpclone.herokuapp.com/'
+    baseURL: 'https://jeremyh-yelp-clone.herokuapp.com/'
 })
 
 export const login = async (user) => {
