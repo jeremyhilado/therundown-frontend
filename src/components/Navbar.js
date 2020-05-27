@@ -24,7 +24,7 @@ function Navbar() {
 					</MDBNavItem>
 				</MDBNavbarNav>
 				<MDBNavbarNav right>
-					<MDBNavItem>
+					<MDBNavItem className='search-nav-item'>
 						<MDBFormInline waves>
 							<div className="md-form my-0">
 								<input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
