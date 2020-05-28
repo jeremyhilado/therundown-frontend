@@ -2,7 +2,8 @@ import React from 'react'
 import Navbar from './Navbar'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn} from 'mdbreact'
+import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBCardBody} from 'mdbreact'
+import moment from 'moment'
 
 
 function BusinessDetail(props) {
@@ -48,7 +49,14 @@ function BusinessDetail(props) {
 		const reviews = business[0].reviews.map((review, i) => {
 			return(
 				<div key={i} className='business-review'>
-
+					{review.rating === 1 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+					{review.rating === 2 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+					{review.rating === 3 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+					{review.rating === 4 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+					{review.rating === 5 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/></>}
+					{moment(review.created_at).format('M/D/YYYY')}
+					<p>{review.owner}</p>
+					<p>{review.review}</p>
 				</div>
 			)
 		})
@@ -71,7 +79,7 @@ function BusinessDetail(props) {
 					removeArrowOnDeviceType={["tablet", "mobile"]}
 					deviceType="desktop"
 					dotListClass="react-multi-carousel-dot-list"
-					itemClass=""
+					className="carousel"
 				>
 					{images}
 				</Carousel>
@@ -84,6 +92,7 @@ function BusinessDetail(props) {
 							{avgRating === 3 && <><MDBIcon size ='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size ='3x' far icon='star' className='red-text'/><MDBIcon size ='3x' far icon='star' className='red-text'/></>}
 							{avgRating === 4 && <><MDBIcon size ='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size ='3x' far icon='star' className='red-text'/></>}
 							{avgRating === 5 && <><MDBIcon size ='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/></>}
+							{business[0].reviews.length} Reviews
 							<p className='detail-price-category'>{business[0].price} ・ {business[0].categories}</p>
 							<MDBBtn color='danger' className='review-btn'>
 								<MDBIcon far icon='star' className='white-text' /> Write A Review
@@ -92,6 +101,40 @@ function BusinessDetail(props) {
 								<MDBIcon icon='camera' className='grey-text darken-4' /> Add A Photo
 							</MDBBtn>
 							<hr/>
+							<h1 className='reviews-header'>Reviews</h1>
+							{reviews}
+						</MDBCol>
+						<MDBCol md='4' className='detail-contact-info-col'>
+							<MDBRow className='detail-contact-info-row'>
+								<MDBCol md='4' className='detail-info-col-icon'>
+									<MDBIcon icon='address-card' size='3x' />
+								</MDBCol>
+								<MDBCol md='8' className='detail-info-col'>
+									<p className='detail-contact-info'>
+										{business[0].location_address}
+										<br/>
+										{business[0].location_city}, {business[0].location_state}
+									</p>
+								</MDBCol>
+							</MDBRow>
+							<hr/>
+							<MDBRow className='detail-contact-info-row'>
+								<MDBCol md='4' className='detail-info-col-icon'>
+									<MDBIcon icon='external-link-square-alt' size='3x' />
+								</MDBCol>
+								<MDBCol md='8' className='detail-info-col'>
+									<a href={business[0].website} target='_blank'>{business[0].website}</a>
+								</MDBCol>
+							</MDBRow>
+							<hr/>
+							<MDBRow className='detail-contact-info-row'>
+								<MDBCol md='4' className='detail-info-col-icon'>
+									<MDBIcon icon='phone-square-alt' size='3x' />
+								</MDBCol>
+								<MDBCol md='8' className='detail-info-col'>
+									<p className='detail-contact-info'>({business[0].phone.substring(0, 3)}) {business[0].phone.substring(3, 6)} - {business[0].phone.substring(6, 10)}</p>
+								</MDBCol>
+							</MDBRow>
 						</MDBCol>
 					</MDBRow>
 				</MDBContainer>

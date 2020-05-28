@@ -59,7 +59,7 @@ function Dashboard(props) {
 		return(
 			<>
 				<Navbar />
-				<MDBRow style={{margin: "15px"}}>
+				<MDBRow style={{margin: "15px", paddingTop: "90px"}}>
 					{allBusinesses}
 				</MDBRow>
 			</>

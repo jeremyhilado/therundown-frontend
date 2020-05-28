@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon} from "mdbreact";
-import {Link} from 'react-router-dom'
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false)
@@ -11,7 +10,7 @@ function Navbar() {
 	}
 
   return (
-		<MDBNavbar color="indigo" dark expand="md">
+		<MDBNavbar color="indigo" dark expand="md" fixed='top'>
 			<MDBNavbarBrand>
 				<MDBNavLink to='/projects/jhilado/the-rundown/dashboard'><strong className="white-text nav-title">The Rundown</strong></MDBNavLink>
 			</MDBNavbarBrand>

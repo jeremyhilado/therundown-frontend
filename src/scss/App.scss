@@ -40,7 +40,7 @@
 
 .nav-title {
     font-family: 'Kaushan Script', cursive;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .add-business-item {
@@ -63,7 +63,7 @@
 }
 
 .menu-dropdown {
-    margin-right: 90px;
+    margin-right: 10px;
 }
 
 .dashboard-card {
@@ -80,6 +80,10 @@
     min-height: 275px;
     background-size: 100% 100%;
     margin: 1px 1px;
+}
+
+.carousel {
+    padding-top: 102px;
 }
 
 .detail-price-category {
@@ -99,6 +103,33 @@
     font-size: 4rem;
 }
 
+.detail-contact-info {
+    margin: 0;
+    padding: 0;
+}
+
+.detail-contact-info-row {
+    height: 90px;
+}
+
+.detail-contact-info-col {
+    border: solid 1px lightgrey;
+}
+
+.detail-info-col-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.detail-info-col {
+    display: flex;
+    align-items: center;
+}
+
+.reviews-header {
+    font-weight: 400;
+}
 @media(min-width: 769px) {
     #login-btn {
         width: 20vw;
