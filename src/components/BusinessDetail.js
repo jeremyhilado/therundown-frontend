@@ -4,6 +4,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput, MDBFormInline} from 'mdbreact'
 import moment from 'moment'
+import ScrollToTop from '../ScrollToTop'
+import { createReview, getReviews } from '../services/api-helper'
 
 
 function BusinessDetail(props) {
@@ -15,12 +17,35 @@ function BusinessDetail(props) {
 		review: ''
 	})
 
+	console.log('BusinessDetail - reviewInfo', reviewInfo)
+
 	console.log('BusinessDetail - radio', radio)
 
 	const handleReviewChange = e => {
-		const value = Number(e.target.value)
+		const value = e.target.value
 		setReviewInfo({...reviewInfo, [e.target.name]: value})
-		setRadio(value)
+		if(value > 0 && value < 6) {
+			setRadio(value)
+		}
+	}
+
+	const renderReview = async () => {
+		const res = await getReviews(props.user.token)
+		props.setReviews(res.data)
+	}
+
+	const handleReviewSubmit = async (e) => {
+		e.preventDefault()
+		await createReview(reviewInfo, props.user.token).then(res => {
+			if(res.status === 201) {
+				setShowReviewForm(false)
+				setReviewInfo({})
+				setRadio(1)
+				renderReview()
+			} else {
+				alert('An error occured while trying to create your review.')
+			}
+		})
 	}
 
 	console.log('BusinessDetail - props', props)
@@ -136,9 +161,10 @@ function BusinessDetail(props) {
 							<hr/>
 
 							{showReviewForm &&
-								<><MDBFormInline>
+								<>Select rating:
+									<MDBFormInline>
 									<MDBInput
-										checked={radio === 1 ? true : false}
+										checked={radio == 1 ? true : false}
 										value='1'
 										label='1'
 										type='radio'
@@ -148,7 +174,7 @@ function BusinessDetail(props) {
 										name='rating'
 									/>
 									<MDBInput 
-										checked={radio === 2 ? true : false}
+										checked={radio == 2 ? true : false}
 										value='2'
 										label='2'
 										type='radio'
@@ -158,7 +184,7 @@ function BusinessDetail(props) {
 										name='rating'
 									/>
 									<MDBInput 
-										checked={radio === 3 ? true : false}
+										checked={radio == 3 ? true : false}
 										value='3'
 										label='3'
 										type='radio'
@@ -168,7 +194,7 @@ function BusinessDetail(props) {
 										name='rating'
 									/>
 									<MDBInput 
-										checked={radio === 4 ? true : false}
+										checked={radio == 4 ? true : false}
 										value='4'
 										label='4'
 										type='radio'
@@ -178,7 +204,7 @@ function BusinessDetail(props) {
 										name='rating'
 									/>
 									<MDBInput 
-										checked={radio === 5 ? true : false}
+										checked={radio == 5 ? true : false}
 										value='5'
 										label='5'
 										type='radio'
@@ -188,9 +214,9 @@ function BusinessDetail(props) {
 										name='rating'
 									/>
 								</MDBFormInline>
-							<form>
-								<MDBInput type='textarea' label='Write review here...' rows='7' />
-								<MDBBtn color='danger' className='review-btn' onClick={() => setShowReviewForm(true)}>
+							<form onSubmit={handleReviewSubmit}>
+								<MDBInput type='textarea' label='Write review here...' rows='7' onChange={handleReviewChange} name='review' />
+								<MDBBtn color='danger' className='review-btn' onClick={handleReviewChange} type='submit' name='business' value={business[0].id}>
 									<MDBIcon icon='pencil-alt' className='white-text' /> Post Review
 								</MDBBtn>
 							</form></>}
@@ -232,6 +258,7 @@ function BusinessDetail(props) {
 						</MDBCol>
 					</MDBRow>
 				</MDBContainer>
+				<ScrollToTop />
 			</>
 		)
 	} else {
