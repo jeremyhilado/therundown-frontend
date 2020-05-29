@@ -18,10 +18,6 @@ function SignUp() {
 	const [displayErrors, setDisplayErrors] = useState(false)
 	const [passwordMatchError, setPasswordMatchError] = useState(false)
 
-	useEffect(() => {
-		window.scrollTo(0, 0)
-	}, [displayErrors, passwordMatchError])
-
 	const checkPassword = () => {
 		if(signupInfo.password === confirmPassword) {
 			return true

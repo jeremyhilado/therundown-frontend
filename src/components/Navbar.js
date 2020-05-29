@@ -18,7 +18,7 @@ function Navbar() {
 			<MDBCollapse id="navbarCollapse3" navbar isOpen={isOpen} >
 				<MDBNavbarNav right>
 					<MDBNavItem active className='add-business-item'>
-						<MDBNavLink className='add-business-link' to="#!">Add Business</MDBNavLink>
+						<MDBNavLink className='add-business-link' to="/projects/jhilado/the-rundown/createbusiness">Add Business</MDBNavLink>
 					</MDBNavItem>
 					<MDBNavItem className='search-nav-item'>
 						<MDBFormInline waves>

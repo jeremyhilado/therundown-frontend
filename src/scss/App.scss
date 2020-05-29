@@ -159,6 +159,16 @@
     color: lightslategray;
 }
 
+.add-business-page {
+    display: flex;
+    justify-content: center;
+    padding: 130px 0 30px 0;
+    .card-body {
+        width: 60vw;
+        height: 850px;
+    }
+}
+
 @media(min-width: 769px) {
     #login-btn {
         width: 20vw;
