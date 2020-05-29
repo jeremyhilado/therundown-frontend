@@ -78,6 +78,7 @@ export const deleteBusiness = async (id, token) => {
                 authorization: 'JWT ' + token
             }
         })
+        return res
     }
     catch (err) {
         console.log(err)
@@ -107,6 +108,7 @@ export const createReview = async (review, token) => {
                 authorization: 'JWT ' + token
             }
         })
+        return res
     }
     catch (err) {
         console.log(err)
@@ -121,6 +123,7 @@ export const updateReview = async (id, review, token) => {
                 authorization: 'JWT ' + token
             }
         })
+        return res
     }
     catch (err) {
         console.log(err)
@@ -135,6 +138,7 @@ export const deleteReview = async (id, token) => {
                 authorization: 'JWT ' + token
             }
         })
+        return res
     }
     catch (err) {
         console.log(err)
@@ -159,7 +163,7 @@ export const getImages = async (token) => {
 
 export const createImage = async (image, token) => {
     try {
-        const res = await api.post('/api/images/', {
+        const res = await api.post('/api/images/', image, {
             headers: {
                 authorization: 'JWT ' + token
             }
