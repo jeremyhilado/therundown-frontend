@@ -165,7 +165,11 @@
     padding: 130px 0 30px 0;
     .card-body {
         width: 60vw;
-        height: 850px;
+        height: 1000px;
+    }
+    .create-business-error {
+        margin-bottom: 0;
+        color: red;
     }
 }
 

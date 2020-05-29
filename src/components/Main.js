@@ -35,9 +35,9 @@ function Main() {
 				<Switch>
 					<Route exact path='/projects/jhilado/the-rundown'><LogIn setUser={setUser} setVerified={setVerified} verified={verified} /></Route>
 					<Route exact path='/projects/jhilado/the-rundown/signup'><SignUp /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/dashboard'><Dashboard businesses={businesses} /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/business/:name' render={props => <BusinessDetail {...props} businesses={businesses} reviews={reviews} setReviews={setReviews} images={images} setImages={setImages} user={user} />} />
-					<Route exact path='/projects/jhilado/the-rundown/createbusiness'><CreateBusiness /></Route>
+					<Route exact path='/projects/jhilado/the-rundown/dashboard'><Dashboard businesses={businesses} images={images} /></Route>
+					<Route exact path='/projects/jhilado/the-rundown/business/:name' render={props => <BusinessDetail {...props} businesses={businesses} reviews={reviews} setReviews={setReviews} images={images} setImages={setImages} setBusinesses={setBusinesses} user={user} />} />
+					<Route exact path='/projects/jhilado/the-rundown/createbusiness'><CreateBusiness setBusinesses={setBusinesses} user={user} /></Route>
 				</Switch>
 			</div>
     )
