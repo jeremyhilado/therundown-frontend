@@ -84,6 +84,7 @@ function BusinessDetail(props) {
 				setReviewInfo({})
 				setRadio()
 				renderBusiness()
+				renderReview()
 			} else {
 				alert('An error occured while trying to create your review. Please make sure you have filled out both fields.')
 				setRadio()
