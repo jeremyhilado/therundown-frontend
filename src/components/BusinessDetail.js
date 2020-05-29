@@ -2,12 +2,26 @@ import React, {useState} from 'react'
 import Navbar from './Navbar'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput} from 'mdbreact'
+import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput, MDBFormInline} from 'mdbreact'
 import moment from 'moment'
 
 
 function BusinessDetail(props) {
 	const [showReviewForm, setShowReviewForm] = useState(false)
+	const [radio, setRadio] = useState(1)
+	const [reviewInfo, setReviewInfo] = useState({
+		business: '',
+		rating: '',
+		review: ''
+	})
+
+	console.log('BusinessDetail - radio', radio)
+
+	const handleReviewChange = e => {
+		const value = Number(e.target.value)
+		setReviewInfo({...reviewInfo, [e.target.name]: value})
+		setRadio(value)
+	}
 
 	console.log('BusinessDetail - props', props)
 
@@ -122,12 +136,64 @@ function BusinessDetail(props) {
 							<hr/>
 
 							{showReviewForm &&
+								<><MDBFormInline>
+									<MDBInput
+										checked={radio === 1 ? true : false}
+										value='1'
+										label='1'
+										type='radio'
+										id='radio1'
+										containerClass='mr-5'
+										onClick={handleReviewChange}
+										name='rating'
+									/>
+									<MDBInput 
+										checked={radio === 2 ? true : false}
+										value='2'
+										label='2'
+										type='radio'
+										id='radio2'
+										containerClass='mr-5'
+										onClick={handleReviewChange}
+										name='rating'
+									/>
+									<MDBInput 
+										checked={radio === 3 ? true : false}
+										value='3'
+										label='3'
+										type='radio'
+										id='radio3'
+										containerClass='mr-5'
+										onClick={handleReviewChange}
+										name='rating'
+									/>
+									<MDBInput 
+										checked={radio === 4 ? true : false}
+										value='4'
+										label='4'
+										type='radio'
+										id='radio4'
+										containerClass='mr-5'
+										onClick={handleReviewChange}
+										name='rating'
+									/>
+									<MDBInput 
+										checked={radio === 5 ? true : false}
+										value='5'
+										label='5'
+										type='radio'
+										id='radio5'
+										containerClass='mr-5'
+										onClick={handleReviewChange}
+										name='rating'
+									/>
+								</MDBFormInline>
 							<form>
 								<MDBInput type='textarea' label='Write review here...' rows='7' />
 								<MDBBtn color='danger' className='review-btn' onClick={() => setShowReviewForm(true)}>
 									<MDBIcon icon='pencil-alt' className='white-text' /> Post Review
 								</MDBBtn>
-							</form>}
+							</form></>}
 							
 							<h1 className='reviews-header'>Reviews</h1>
 							{reviews.reverse()}
