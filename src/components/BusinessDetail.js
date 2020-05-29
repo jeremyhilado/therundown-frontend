@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput, MDBFormInline} from 'mdbreact'
 import moment from 'moment'
 import ScrollToTop from '../ScrollToTop'
-import { createReview, getReviews, getImages, createImage } from '../services/api-helper'
+import { createReview, getReviews, getImages, createImage, getBusinesses } from '../services/api-helper'
 
 
 function BusinessDetail(props) {
@@ -22,7 +22,7 @@ function BusinessDetail(props) {
 		image_url: '',
 		description: ''
 	})
-	const [itemCreated, setItemCreated] = useState(false)
+	const [imageAdded, setImageAdded] = useState(false)
 
 	console.log('imageInfo', imageInfo)
 
@@ -71,6 +71,11 @@ function BusinessDetail(props) {
 		props.setReviews(res.data)
 	}
 
+	const renderBusiness = async () => {
+		const res = await getBusinesses(props.user.token)
+		props.setBusinesses(res.data)
+	}
+
 	const handleReviewSubmit = async (e) => {
 		e.preventDefault()
 		await createReview(reviewInfo, props.user.token).then(res => {
@@ -78,7 +83,7 @@ function BusinessDetail(props) {
 				setShowReviewForm(false)
 				setReviewInfo({})
 				setRadio()
-				renderReview()
+				renderBusiness()
 			} else {
 				alert('An error occured while trying to create your review. Please make sure you have filled out both fields.')
 				setRadio()
@@ -93,8 +98,8 @@ function BusinessDetail(props) {
 				setShowImageForm(false)
 				setImageInfo({})
 				renderImage()
-				setItemCreated(true)
-				setItemCreated(false)
+				setImageAdded(true)
+				setImageAdded(false)
 			} else {
 				alert('An error occured while trying to post your image. Please make sure both fields are properly filled out.')
 			}
@@ -341,7 +346,7 @@ function BusinessDetail(props) {
 					</MDBRow>
 				</MDBContainer>
 				<ScrollToTop />
-				{itemCreated && <ScrollToTop />}
+				{imageAdded && <ScrollToTop />}
 			</>
 		)
 	} else {

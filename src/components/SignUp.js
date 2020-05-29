@@ -18,10 +18,6 @@ function SignUp() {
 	const [displayErrors, setDisplayErrors] = useState(false)
 	const [passwordMatchError, setPasswordMatchError] = useState(false)
 
-	useEffect(() => {
-		window.scrollTo(0, 0)
-	}, [displayErrors, passwordMatchError])
-
 	const checkPassword = () => {
 		if(signupInfo.password === confirmPassword) {
 			return true
@@ -64,9 +60,9 @@ function SignUp() {
 					<MDBCard>
 						<MDBCardBody>
 							<p className='text-center'>Sign Up</p>
-							{displayErrors && <p className='text-center signup-error'>email error: {errors.email[0]}</p>}
+							{(displayErrors && errors.name) ? <p className='text-center signup-error'>email error: {errors.email[0]}</p> : ''}
 							{(displayErrors && errors.password) ? <p className='text-center signup-error'>password error: {errors.password[0]}</p> : ''}
-							{displayErrors && <p className='text-center signup-error'>username error: {errors.username[0]}</p>}
+							{(displayErrors && errors.username) ? <p className='text-center signup-error'>username error: {errors.username[0]}</p> : ''}
 							{passwordMatchError && <p className='text-center signup-error'>passwords do not match</p>}
 							<form onSubmit={handleSignupSubmit}>
 								<MDBInput

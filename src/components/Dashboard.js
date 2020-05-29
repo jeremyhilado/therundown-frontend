@@ -22,11 +22,11 @@ function Dashboard(props) {
 						<Link to={`/projects/jhilado/the-rundown/business/${business.name}`}>
 						<MDBCardImage
 							top
-							src={business.images[0].image_url ? business.images[0].image_url : 'https://res.cloudinary.com/do6tcpizk/image/upload/c_scale,h_700,w_700/v1585845946/Project%202%20React%20App/product_image_not_available_otx8jx.png'}
+							src={business.images[0] ? business.images[0].image_url : 'https://res.cloudinary.com/do6tcpizk/image/upload/c_scale,h_700,w_700/v1585845946/Project%202%20React%20App/product_image_not_available_otx8jx.png'}
 							overlay='white-slight'
 							hover
 							waves
-							alt={business.images[0].description}
+							alt={business.images[0] ? business.images[0].description : 'no images'}
 							style={{height: '300px'}}
 						/>
 						</Link>
@@ -38,6 +38,7 @@ function Dashboard(props) {
 								<br/>
 								{business.location_city}, {business.location_state}
 								<br/>
+								{Number.isNaN(avgRating) && <><MDBIcon size='2x' far icon='star' className='black-text dashboard-rating' /><MDBIcon size='2x' far icon='star' className='black-text dashboard-rating' /><MDBIcon size='2x' far icon='star' className='black-text dashboard-rating' /><MDBIcon size='2x' far icon='star' className='black-text dashboard-rating' /><MDBIcon size='2x' far icon='star' className='black-text dashboard-rating' /></>}
 								{avgRating === 1 && <><MDBIcon size ='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/></>}
 								{avgRating === 2 && <><MDBIcon size ='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/></>}
 								{avgRating === 3 && <><MDBIcon size ='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/></>}
