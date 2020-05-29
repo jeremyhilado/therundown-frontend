@@ -5,17 +5,43 @@ import "react-multi-carousel/lib/styles.css";
 import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput, MDBFormInline} from 'mdbreact'
 import moment from 'moment'
 import ScrollToTop from '../ScrollToTop'
-import { createReview, getReviews } from '../services/api-helper'
+import { createReview, getReviews, getImages, createImage } from '../services/api-helper'
 
 
 function BusinessDetail(props) {
 	const [showReviewForm, setShowReviewForm] = useState(false)
-	const [radio, setRadio] = useState(1)
+	const [showImageForm, setShowImageForm] = useState(false)
+	const [radio, setRadio] = useState()
 	const [reviewInfo, setReviewInfo] = useState({
 		business: '',
 		rating: '',
 		review: ''
 	})
+	const [imageInfo, setImageInfo] = useState({
+		business: '',
+		image_url: '',
+		description: ''
+	})
+
+	console.log('imageInfo', imageInfo)
+
+	const toggleReviewForm = () => {
+		if(showImageForm === true) {
+			setShowImageForm(false)
+			setShowReviewForm(true)
+		} else {
+			setShowReviewForm(!showReviewForm)
+		}
+	}
+
+	const toggleImageForm = () => {
+		if(showReviewForm === true) {
+			setShowReviewForm(false)
+			setShowImageForm(true)
+		} else {
+			setShowImageForm(!showImageForm)
+		}
+	}
 
 	console.log('BusinessDetail - reviewInfo', reviewInfo)
 
@@ -29,6 +55,16 @@ function BusinessDetail(props) {
 		}
 	}
 
+	const handleImageChange = e => {
+		const value = e.target.value
+		setImageInfo({...imageInfo, [e.target.name]: value})
+	}
+
+	const renderImage = async () => {
+		const res = await getImages(props.user.token)
+		props.setImages(res.data)
+	}
+
 	const renderReview = async () => {
 		const res = await getReviews(props.user.token)
 		props.setReviews(res.data)
@@ -40,10 +76,24 @@ function BusinessDetail(props) {
 			if(res.status === 201) {
 				setShowReviewForm(false)
 				setReviewInfo({})
-				setRadio(1)
+				setRadio()
 				renderReview()
 			} else {
-				alert('An error occured while trying to create your review.')
+				alert('An error occured while trying to create your review. Please make sure you have filled out both fields.')
+				setRadio()
+			}
+		})
+	}
+
+	const handleImageSubmit = async (e) => {
+		e.preventDefault()
+		await createImage(imageInfo, props.user.token).then(res => {
+			if(res.status === 201) {
+				setShowImageForm(false)
+				setImageInfo({})
+				renderImage()
+			} else {
+				alert('An error occured while trying to post your image. Please make sure both fields are properly filled out.')
 			}
 		})
 	}
@@ -152,10 +202,10 @@ function BusinessDetail(props) {
 							&nbsp; &nbsp;
 							{business[0].reviews.length} Reviews
 							<p className='detail-price-category'>{business[0].price} ・ {business[0].categories}</p>
-							<MDBBtn color='danger' className='review-btn' onClick={() => setShowReviewForm(true)}>
+							<MDBBtn color='danger' className='review-btn' onClick={toggleReviewForm}>
 								<MDBIcon far icon='star' className='white-text' /> Write A Review
 							</MDBBtn>
-							<MDBBtn outline color='grey darken-4'>
+							<MDBBtn outline color='grey darken-4'  onClick={toggleImageForm}>
 								<MDBIcon icon='camera' className='grey-text darken-4' /> Add A Photo
 							</MDBBtn>
 							<hr/>
@@ -219,7 +269,36 @@ function BusinessDetail(props) {
 								<MDBBtn color='danger' className='review-btn' onClick={handleReviewChange} type='submit' name='business' value={business[0].id}>
 									<MDBIcon icon='pencil-alt' className='white-text' /> Post Review
 								</MDBBtn>
-							</form></>}
+							</form>
+							</>}
+
+							{showImageForm && <>
+							<form onSubmit={handleImageSubmit}> 
+								<MDBInput 
+									label='Put image URL here...' 
+									group 
+									type='url' 
+									validate
+									error='wrong'
+									success='right'
+									onChange={handleImageChange} 
+									name='image_url' 
+									value={imageInfo.image_url}/>
+								<MDBInput 
+									label='Write image description here...' 
+									group 
+									type='text'
+									validate
+									error='wrong'
+									success='right'
+									onChange={handleImageChange} 
+									name='description' 
+									value={imageInfo.description} />
+								<MDBBtn outline color='grey darken-4' onClick={handleImageChange} type='submit' name='business' value={business[0].id}>
+									<MDBIcon icon='file-upload' className='grey-text darken-4' /> Upload Photo
+								</MDBBtn>
+							</form>
+							</>}
 							
 							<h1 className='reviews-header'>Reviews</h1>
 							{reviews.reverse()}
@@ -243,7 +322,7 @@ function BusinessDetail(props) {
 									<MDBIcon icon='external-link-square-alt' size='3x' />
 								</MDBCol>
 								<MDBCol md='8' className='detail-info-col'>
-									<a href={business[0].website} target='_blank'>{business[0].website}</a>
+									<a href={business[0].website} target='_blank' rel="noopener noreferrer">{business[0].website}</a>
 								</MDBCol>
 							</MDBRow>
 							<hr/>

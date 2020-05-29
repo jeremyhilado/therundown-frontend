@@ -163,7 +163,7 @@ export const getImages = async (token) => {
 
 export const createImage = async (image, token) => {
     try {
-        const res = await api.post('/api/images/', {
+        const res = await api.post('/api/images/', image, {
             headers: {
                 authorization: 'JWT ' + token
             }
