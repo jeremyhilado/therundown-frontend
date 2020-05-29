@@ -112,7 +112,7 @@
     height: 90px;
 }
 
-.detail-contact-info-col {
+.detail-contact-info-box {
     border: solid 1px lightgrey;
 }
 
@@ -120,16 +120,39 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    border-left: 1px solid rgba(0,0,0,.1);
+}
+
+.detail-address-icon-border {
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.detail-address-border {
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.detail-phone-icon-border {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.detail-phone-border {
+    border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .detail-info-col {
     display: flex;
     align-items: center;
+    border-right: 1px solid rgba(0,0,0,.1);
 }
 
 .reviews-header {
     font-weight: 400;
 }
+
+.review-owner {
+    color: lightslategray;
+}
+
 @media(min-width: 769px) {
     #login-btn {
         width: 20vw;

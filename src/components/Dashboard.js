@@ -14,7 +14,7 @@ function Dashboard(props) {
 			for(let i = 0; i < business.reviews.length; i++) {
 				ratingSum += business.reviews[i].rating
 			}
-			let avgRating = Math.ceil(ratingSum / business.reviews.length)
+			let avgRating = Math.round(ratingSum / business.reviews.length)
 			console.log('Dashboard - avgRating', business.name, avgRating)
 			return(
 				<MDBCol md='6' lg='4' key={i} style={{padding: "10px"}}>

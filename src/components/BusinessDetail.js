@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from './Navbar'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBCardBody} from 'mdbreact'
+import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput} from 'mdbreact'
 import moment from 'moment'
 
 
 function BusinessDetail(props) {
+	const [showReviewForm, setShowReviewForm] = useState(false)
 
 	console.log('BusinessDetail - props', props)
 
@@ -39,24 +40,41 @@ function BusinessDetail(props) {
 		for(let i = 0; i < business[0].reviews.length; i++) {
 			ratingSum += business[0].reviews[i].rating
 		}
-		let avgRating = Math.ceil(ratingSum / business[0].reviews.length)
-		const images = business[0].images.map((image, i) => {
+
+		let avgRating = Math.round(ratingSum / business[0].reviews.length)
+
+		const businessImages = props.images.filter(images => {
+			return images.business === business[0].id
+		})
+
+		const images = businessImages.map((image, i) => {
 			return(
 				<div key={i} className='carousel-image' style={{backgroundImage: `url(${image.image_url})`}}>
 				</div>
 			);
 		})
-		const reviews = business[0].reviews.map((review, i) => {
+
+		const businessReviews = props.reviews.filter(reviews => {
+			return reviews.business === business[0].id
+		})
+
+		console.log('BusinessDetail - businessReviews', businessReviews)
+
+		const reviews = businessReviews.map((review, i) => {
 			return(
 				<div key={i} className='business-review'>
-					{review.rating === 1 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
-					{review.rating === 2 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
-					{review.rating === 3 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
-					{review.rating === 4 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
-					{review.rating === 5 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/></>}
-					{moment(review.created_at).format('M/D/YYYY')}
-					<p>{review.owner}</p>
+					<p>
+						{review.rating === 1 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+						{review.rating === 2 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+						{review.rating === 3 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+						{review.rating === 4 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size ='lg' far icon='star' className='red-text'/></>}
+						{review.rating === 5 && <><MDBIcon size ='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/><MDBIcon size='lg' icon='star' className='red-text'/></>}
+						&nbsp; &nbsp;
+						{moment(review.created_at).format('M/D/YYYY')}
+					</p>
+					<p className='review-owner'>{review.owner}</p>
 					<p>{review.review}</p>
+					<hr/>
 				</div>
 			)
 		})
@@ -92,24 +110,34 @@ function BusinessDetail(props) {
 							{avgRating === 3 && <><MDBIcon size ='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size ='3x' far icon='star' className='red-text'/><MDBIcon size ='3x' far icon='star' className='red-text'/></>}
 							{avgRating === 4 && <><MDBIcon size ='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size ='3x' far icon='star' className='red-text'/></>}
 							{avgRating === 5 && <><MDBIcon size ='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/><MDBIcon size='3x' icon='star' className='red-text'/></>}
+							&nbsp; &nbsp;
 							{business[0].reviews.length} Reviews
 							<p className='detail-price-category'>{business[0].price} ・ {business[0].categories}</p>
-							<MDBBtn color='danger' className='review-btn'>
+							<MDBBtn color='danger' className='review-btn' onClick={() => setShowReviewForm(true)}>
 								<MDBIcon far icon='star' className='white-text' /> Write A Review
 							</MDBBtn>
 							<MDBBtn outline color='grey darken-4'>
 								<MDBIcon icon='camera' className='grey-text darken-4' /> Add A Photo
 							</MDBBtn>
 							<hr/>
+
+							{showReviewForm &&
+							<form>
+								<MDBInput type='textarea' label='Write review here...' rows='7' />
+								<MDBBtn color='danger' className='review-btn' onClick={() => setShowReviewForm(true)}>
+									<MDBIcon icon='pencil-alt' className='white-text' /> Post Review
+								</MDBBtn>
+							</form>}
+							
 							<h1 className='reviews-header'>Reviews</h1>
-							{reviews}
+							{reviews.reverse()}
 						</MDBCol>
 						<MDBCol md='4' className='detail-contact-info-col'>
 							<MDBRow className='detail-contact-info-row'>
-								<MDBCol md='4' className='detail-info-col-icon'>
+								<MDBCol md='4' className='detail-info-col-icon detail-address-icon-border'>
 									<MDBIcon icon='address-card' size='3x' />
 								</MDBCol>
-								<MDBCol md='8' className='detail-info-col'>
+								<MDBCol md='8' className='detail-info-col detail-address-border'>
 									<p className='detail-contact-info'>
 										{business[0].location_address}
 										<br/>
@@ -119,7 +147,7 @@ function BusinessDetail(props) {
 							</MDBRow>
 							<hr/>
 							<MDBRow className='detail-contact-info-row'>
-								<MDBCol md='4' className='detail-info-col-icon'>
+								<MDBCol md='4' className='detail-info-col-icon detail-website-border'>
 									<MDBIcon icon='external-link-square-alt' size='3x' />
 								</MDBCol>
 								<MDBCol md='8' className='detail-info-col'>
@@ -128,10 +156,10 @@ function BusinessDetail(props) {
 							</MDBRow>
 							<hr/>
 							<MDBRow className='detail-contact-info-row'>
-								<MDBCol md='4' className='detail-info-col-icon'>
+								<MDBCol md='4' className='detail-info-col-icon detail-phone-icon-border'>
 									<MDBIcon icon='phone-square-alt' size='3x' />
 								</MDBCol>
-								<MDBCol md='8' className='detail-info-col'>
+								<MDBCol md='8' className='detail-info-col detail-phone-border'>
 									<p className='detail-contact-info'>({business[0].phone.substring(0, 3)}) {business[0].phone.substring(3, 6)} - {business[0].phone.substring(6, 10)}</p>
 								</MDBCol>
 							</MDBRow>
