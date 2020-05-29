@@ -22,6 +22,7 @@ function BusinessDetail(props) {
 		image_url: '',
 		description: ''
 	})
+	const [itemCreated, setItemCreated] = useState(false)
 
 	console.log('imageInfo', imageInfo)
 
@@ -92,6 +93,8 @@ function BusinessDetail(props) {
 				setShowImageForm(false)
 				setImageInfo({})
 				renderImage()
+				setItemCreated(true)
+				setItemCreated(false)
 			} else {
 				alert('An error occured while trying to post your image. Please make sure both fields are properly filled out.')
 			}
@@ -338,6 +341,7 @@ function BusinessDetail(props) {
 					</MDBRow>
 				</MDBContainer>
 				<ScrollToTop />
+				{itemCreated && <ScrollToTop />}
 			</>
 		)
 	} else {
