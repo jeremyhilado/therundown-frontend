@@ -57,7 +57,10 @@ function SearchResultsPage(props) {
     return(
 			<>
 				<Navbar />
-				<MDBRow style={{margin: "15px", paddingTop: "90px"}}>
+				<MDBRow style={{margin: "15px", paddingTop: "95px"}}>
+					<h3>{searchData.length} results found...</h3>
+				</MDBRow>
+				<MDBRow style={{margin: "15px"}}>
 					{searchData}
 				</MDBRow>
 			</>
