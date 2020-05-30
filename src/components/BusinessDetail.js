@@ -113,6 +113,7 @@ function BusinessDetail(props) {
 		await deleteBusiness(business[0].id, props.user.token).then(res => {
 			if(res.status === 204) {
 				renderBusiness()
+				alert('Business successfully deleted!')
 				setBusinessDeleted(true)
 			} else {
 				alert('An error occured while trying to delete business.')
