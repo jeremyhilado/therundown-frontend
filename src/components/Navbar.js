@@ -3,7 +3,7 @@ import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNav
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon} from "mdbreact";
 import {searchDatabase} from '../services/api-helper'
 import { SearchContext } from './Main';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 function Navbar() {
 	const searchContext = useContext(SearchContext)
@@ -58,7 +58,7 @@ function Navbar() {
 							</MDBDropdownToggle>
 							<MDBDropdownMenu className='menu-dropdown'>
 								<MDBDropdownItem>Profile</MDBDropdownItem>
-								<MDBDropdownItem>Log Out</MDBDropdownItem>
+								<Link to='/projects/jhilado/the-rundown/'><MDBDropdownItem onClick={() => {searchContext.setUser(); searchContext.setVerified(false); localStorage.setItem('user', JSON.stringify(''))}}>Log Out</MDBDropdownItem></Link> 
 							</MDBDropdownMenu>
 						</MDBDropdown>
 					</MDBNavItem>
