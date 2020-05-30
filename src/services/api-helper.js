@@ -205,3 +205,18 @@ export const deleteImage = async (id, token) => {
         return err
     }
 }
+
+export const searchDatabase = async (term) => {
+    try {
+        const res = await api.get('/api/search/', {
+            params: {
+                q: term
+            }
+        })
+        return res
+    }
+    catch (err) {
+        console.log(err)
+        return err
+    }
+}

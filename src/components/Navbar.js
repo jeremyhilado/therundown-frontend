@@ -1,15 +1,39 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon} from "mdbreact";
+import {searchDatabase} from '../services/api-helper'
+import { SearchContext } from './Main';
+import { Redirect, Link } from "react-router-dom";
 
 function Navbar() {
+	const searchContext = useContext(SearchContext)
 	const [isOpen, setIsOpen] = useState(false)
+	const [searchTerm, setSearchTerm] = useState('')
+	const [showSearchResults, setShowSearchResults] = useState(false)
+
+	console.log('Navbar - searchTerm', searchTerm)
+
+	console.log('Navbar - searchContext', searchContext)
 
 	const toggleCollapse = () => {
 		setIsOpen(!isOpen)
 	}
 
+	const handleSearchChange = e => {
+		setSearchTerm(e.target.value)
+	}
+
+	const submitSearch = async (e) => {
+		e.preventDefault()
+		const res = await searchDatabase(searchTerm)
+		console.log('submitSearch', res.data)
+		searchContext.setSearchResults(res.data)
+		setShowSearchResults(true)
+		setSearchTerm('')
+	}
+
   return (
+		<>
 		<MDBNavbar color="indigo" dark expand="md" fixed='top'>
 			<MDBNavbarBrand>
 				<MDBNavLink to='/projects/jhilado/the-rundown/dashboard'><strong className="white-text nav-title">The Rundown</strong></MDBNavLink>
@@ -21,9 +45,9 @@ function Navbar() {
 						<MDBNavLink className='add-business-link' to="/projects/jhilado/the-rundown/createbusiness">Add Business</MDBNavLink>
 					</MDBNavItem>
 					<MDBNavItem className='search-nav-item'>
-						<MDBFormInline waves>
+						<MDBFormInline waves onSubmit={submitSearch}>
 							<div className="md-form my-0">
-								<input className="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search" />
+								<input className="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search" onChange={handleSearchChange} value={searchTerm} />
 							</div>
 						</MDBFormInline>
 					</MDBNavItem>
@@ -34,13 +58,15 @@ function Navbar() {
 							</MDBDropdownToggle>
 							<MDBDropdownMenu className='menu-dropdown'>
 								<MDBDropdownItem>Profile</MDBDropdownItem>
-								<MDBDropdownItem>Log Out</MDBDropdownItem>
+								<Link to='/projects/jhilado/the-rundown/'><MDBDropdownItem onClick={() => {searchContext.setUser(); searchContext.setVerified(false); localStorage.setItem('user', JSON.stringify(''))}}>Log Out</MDBDropdownItem></Link> 
 							</MDBDropdownMenu>
 						</MDBDropdown>
 					</MDBNavItem>
 				</MDBNavbarNav>
 			</MDBCollapse>
 		</MDBNavbar>
+		{showSearchResults && <Redirect to='/projects/jhilado/the-rundown/searchresults' />}
+		</>
 	);
 }
 

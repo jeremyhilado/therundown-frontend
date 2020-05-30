@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, createContext} from 'react'
 import LogIn from './LogIn'
 import { Switch, Route } from 'react-router-dom'
 import SignUp from './SignUp'
@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import {getBusinesses, getReviews, getImages} from '../services/api-helper'
 import BusinessDetail from './BusinessDetail'
 import CreateBusiness from './CreateBusiness'
+import SearchResultsPage from './SearchResultsPage'
 
 function Main() {
 	const [user, setUser] = useState(() => {
@@ -16,6 +17,7 @@ function Main() {
 	const [businesses, setBusinesses] = useState([])
 	const [reviews, setReviews] = useState([])
 	const [images, setImages] = useState([])
+	const [searchResults, setSearchResults] = useState([])
 
 	useEffect(() => {
 		const makeApiCall = async () => {
@@ -29,18 +31,21 @@ function Main() {
 		makeApiCall()
 	}, [])
 
-
     return(
 			<div>
+				<SearchContext.Provider value={{setSearchResults, setUser, setVerified}}>
 				<Switch>
 					<Route exact path='/projects/jhilado/the-rundown'><LogIn setUser={setUser} setVerified={setVerified} verified={verified} /></Route>
 					<Route exact path='/projects/jhilado/the-rundown/signup'><SignUp /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/dashboard'><Dashboard businesses={businesses} images={images} /></Route>
+					<Route exact path='/projects/jhilado/the-rundown/dashboard'><Dashboard businesses={businesses} /></Route>
 					<Route exact path='/projects/jhilado/the-rundown/business/:name' render={props => <BusinessDetail {...props} businesses={businesses} reviews={reviews} setReviews={setReviews} images={images} setImages={setImages} setBusinesses={setBusinesses} user={user} />} />
 					<Route exact path='/projects/jhilado/the-rundown/createbusiness'><CreateBusiness setBusinesses={setBusinesses} user={user} /></Route>
+					<Route exact path='/projects/jhilado/the-rundown/searchresults'><SearchResultsPage searchResults={searchResults} /></Route>
 				</Switch>
+				</SearchContext.Provider>
 			</div>
     )
 }
 
 export default Main
+export const SearchContext = createContext()
