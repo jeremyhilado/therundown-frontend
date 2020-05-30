@@ -65,12 +65,12 @@ function LogIn(props) {
                 />
                 <MDBBtn id='login-btn' color='indigo' type='submit'>Submit</MDBBtn>
               </form>
-              <p style={{textAlign: 'center'}}>Not a member? <Link to='/projects/jhilado/the-rundown/signup' style={{textDecoration: 'underline'}}>Sign Up</Link></p>
+              <p style={{textAlign: 'center'}}>Not a member? <Link to='/signup' style={{textDecoration: 'underline'}}>Sign Up</Link></p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      {props.verified && <Redirect to='/projects/jhilado/the-rundown/dashboard' />}
+      {props.verified && <Redirect to='/dashboard' />}
     </div>
   );
 }

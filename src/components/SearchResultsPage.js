@@ -16,7 +16,7 @@ function SearchResultsPage(props) {
 			return(
 				<MDBCol md='6' lg='4' key={i} style={{padding: "10px"}}>
 					<MDBCard className='dashboard-card'>
-						<Link to={`/projects/jhilado/the-rundown/business/${business.name}`}>
+						<Link to={`/business/${business.name}`}>
 						<MDBCardImage
 							top
 							src={business.images[0] ? business.images[0].image_url : 'https://res.cloudinary.com/do6tcpizk/image/upload/c_scale,h_700,w_700/v1585845946/Project%202%20React%20App/product_image_not_available_otx8jx.png'}
@@ -42,7 +42,7 @@ function SearchResultsPage(props) {
 								{avgRating === 4 && <><MDBIcon size ='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size ='2x' far icon='star' className='red-text dashboard-rating'/></>}
 								{avgRating === 5 && <><MDBIcon size ='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/><MDBIcon size='2x' icon='star' className='red-text dashboard-rating'/></>}
 							</MDBCardText>
-							<Link to={`/projects/jhilado/the-rundown/business/${business.name}`} className='black-text d-flex justify-content-end'>
+							<Link to={`/business/${business.name}`} className='black-text d-flex justify-content-end'>
 								<h6>
 									More info
 									<MDBIcon icon='angle-double-right' className='ml-2' />

@@ -35,12 +35,12 @@ function Main() {
 			<div>
 				<SearchContext.Provider value={{setSearchResults, setUser, setVerified}}>
 				<Switch>
-					<Route exact path='/projects/jhilado/the-rundown'><LogIn setUser={setUser} setVerified={setVerified} verified={verified} /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/signup'><SignUp /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/dashboard'><Dashboard businesses={businesses} /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/business/:name' render={props => <BusinessDetail {...props} businesses={businesses} reviews={reviews} setReviews={setReviews} images={images} setImages={setImages} setBusinesses={setBusinesses} user={user} />} />
-					<Route exact path='/projects/jhilado/the-rundown/createbusiness'><CreateBusiness setBusinesses={setBusinesses} user={user} /></Route>
-					<Route exact path='/projects/jhilado/the-rundown/searchresults'><SearchResultsPage searchResults={searchResults} /></Route>
+					<Route exact path='/'><LogIn setUser={setUser} setVerified={setVerified} verified={verified} /></Route>
+					<Route exact path='/signup'><SignUp /></Route>
+					<Route exact path='/dashboard'><Dashboard businesses={businesses} /></Route>
+					<Route exact path='/business/:name' render={props => <BusinessDetail {...props} businesses={businesses} reviews={reviews} setReviews={setReviews} images={images} setImages={setImages} setBusinesses={setBusinesses} user={user} />} />
+					<Route exact path='/createbusiness'><CreateBusiness setBusinesses={setBusinesses} user={user} /></Route>
+					<Route exact path='/searchresults'><SearchResultsPage searchResults={searchResults} /></Route>
 				</Switch>
 				</SearchContext.Provider>
 			</div>

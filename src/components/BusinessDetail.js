@@ -199,7 +199,7 @@ function BusinessDetail(props) {
 				>
 					{images}
 				</Carousel>
-				<MDBContainer>
+				<MDBContainer fluid className='business-detail-container'>
 					<MDBRow className='detail-info'>
 						<MDBCol md='8'>
 							<h1 className='detail-business-name'>{business[0].name}</h1>

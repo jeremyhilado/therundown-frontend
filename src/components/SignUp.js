@@ -133,7 +133,7 @@ function SignUp() {
 					</MDBCard>
 				</MDBCol>
 			</MDBRow>
-			{success && <Redirect to='/projects/jhilado/the-rundown/' />}
+			{success && <Redirect to='/' />}
 			{displayErrors && <ScrollToTop />}
 		</div>
 	)

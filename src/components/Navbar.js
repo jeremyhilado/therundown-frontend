@@ -36,13 +36,13 @@ function Navbar() {
 		<>
 		<MDBNavbar color="indigo" dark expand="md" fixed='top'>
 			<MDBNavbarBrand>
-				<MDBNavLink to='/projects/jhilado/the-rundown/dashboard'><strong className="white-text nav-title">The Rundown</strong></MDBNavLink>
+				<MDBNavLink to='/dashboard'><strong className="white-text nav-title">The Rundown</strong></MDBNavLink>
 			</MDBNavbarBrand>
 			<MDBNavbarToggler onClick={toggleCollapse} />
 			<MDBCollapse id="navbarCollapse3" navbar isOpen={isOpen} >
 				<MDBNavbarNav right>
 					<MDBNavItem active className='add-business-item'>
-						<MDBNavLink className='add-business-link' to="/projects/jhilado/the-rundown/createbusiness">Add Business</MDBNavLink>
+						<MDBNavLink className='add-business-link' to="/createbusiness">Add Business</MDBNavLink>
 					</MDBNavItem>
 					<MDBNavItem className='search-nav-item'>
 						<MDBFormInline waves onSubmit={submitSearch}>
@@ -58,14 +58,14 @@ function Navbar() {
 							</MDBDropdownToggle>
 							<MDBDropdownMenu className='menu-dropdown'>
 								<MDBDropdownItem>Profile</MDBDropdownItem>
-								<Link to='/projects/jhilado/the-rundown/'><MDBDropdownItem onClick={() => {searchContext.setUser(); searchContext.setVerified(false); localStorage.setItem('user', JSON.stringify(''))}}>Log Out</MDBDropdownItem></Link> 
+								<Link to='/'><MDBDropdownItem onClick={() => {searchContext.setUser(); searchContext.setVerified(false); localStorage.setItem('user', JSON.stringify(''))}}>Log Out</MDBDropdownItem></Link> 
 							</MDBDropdownMenu>
 						</MDBDropdown>
 					</MDBNavItem>
 				</MDBNavbarNav>
 			</MDBCollapse>
 		</MDBNavbar>
-		{showSearchResults && <Redirect to='/projects/jhilado/the-rundown/searchresults' />}
+		{showSearchResults && <Redirect to='/searchresults' />}
 		</>
 	);
 }

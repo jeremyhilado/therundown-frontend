@@ -158,7 +158,7 @@ function CreateBusiness(props) {
 					</MDBCard>
 				</MDBCol>
 			</MDBRow>
-			{success && <Redirect to='/projects/jhilado/the-rundown/dashboard' />}
+			{success && <Redirect to='/dashboard' />}
 			{displayErrors && <ScrollToTop />}
 		</div>
 	)
