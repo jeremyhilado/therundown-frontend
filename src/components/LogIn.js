@@ -23,7 +23,7 @@ function LogIn(props) {
   const handleLoginSubmit = async (e) => {
     e.preventDefault()
     await login(loginInfo).then(res => {
-      if(res.status === 200) {
+      if(res.data) {
         props.setUser(res.data)
         localStorage.setItem('user', JSON.stringify(res.data))
         props.setVerified(true)
