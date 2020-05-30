@@ -11,6 +11,8 @@ function Navbar() {
 	const [searchTerm, setSearchTerm] = useState('')
 	const [showSearchResults, setShowSearchResults] = useState(false)
 
+	console.log('Navbar - searchTerm', searchTerm)
+
 	console.log('Navbar - searchContext', searchContext)
 
 	const toggleCollapse = () => {
@@ -24,6 +26,7 @@ function Navbar() {
 	const submitSearch = async (e) => {
 		e.preventDefault()
 		const res = await searchDatabase(searchTerm)
+		console.log('submitSearch', res.data)
 		searchContext.setSearchResults(res.data)
 		setShowSearchResults(true)
 		setSearchTerm('')
@@ -44,7 +47,7 @@ function Navbar() {
 					<MDBNavItem className='search-nav-item'>
 						<MDBFormInline waves onSubmit={submitSearch}>
 							<div className="md-form my-0">
-								<input className="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search" />
+								<input className="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search" onChange={handleSearchChange} value={searchTerm} />
 							</div>
 						</MDBFormInline>
 					</MDBNavItem>
