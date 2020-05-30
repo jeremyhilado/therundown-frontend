@@ -5,7 +5,8 @@ import "react-multi-carousel/lib/styles.css";
 import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput, MDBFormInline} from 'mdbreact'
 import moment from 'moment'
 import ScrollToTop from '../ScrollToTop'
-import { createReview, getReviews, getImages, createImage, getBusinesses } from '../services/api-helper'
+import { createReview, getReviews, getImages, createImage, getBusinesses, deleteBusiness } from '../services/api-helper'
+import {Link, Redirect} from 'react-router-dom'
 
 
 function BusinessDetail(props) {
@@ -23,6 +24,7 @@ function BusinessDetail(props) {
 		description: ''
 	})
 	const [imageAdded, setImageAdded] = useState(false)
+	const [businessDeleted, setBusinessDeleted] = useState(false)
 
 	console.log('imageInfo', imageInfo)
 
@@ -103,6 +105,17 @@ function BusinessDetail(props) {
 				setImageAdded(false)
 			} else {
 				alert('An error occured while trying to post your image. Please make sure both fields are properly filled out.')
+			}
+		})
+	}
+
+	const handleDeleteBusiness = async (id) => {
+		await deleteBusiness(business[0].id, props.user.token).then(res => {
+			if(res.status === 204) {
+				renderBusiness()
+				setBusinessDeleted(true)
+			} else {
+				alert('An error occured while trying to delete business.')
 			}
 		})
 	}
@@ -217,6 +230,15 @@ function BusinessDetail(props) {
 							<MDBBtn outline color='grey darken-4'  onClick={toggleImageForm}>
 								<MDBIcon icon='camera' className='grey-text darken-4' /> Add A Photo
 							</MDBBtn>
+							{
+								(business[0].owner === props.user.username) && <>
+								<Link to={`/editbusiness/${business[0].name}`} onClick={props.setCurrentBusiness(business[0])}><MDBBtn color='indigo'>
+									<MDBIcon far icon='edit' /> Edit Business
+								</MDBBtn></Link>
+								<MDBBtn color='indigo' onClick={handleDeleteBusiness}>
+									<MDBIcon icon='trash-alt' /> Delete Business
+								</MDBBtn></>
+							}
 							<hr/>
 
 							{showReviewForm &&
@@ -348,6 +370,7 @@ function BusinessDetail(props) {
 				</MDBContainer>
 				<ScrollToTop />
 				{imageAdded && <ScrollToTop />}
+				{businessDeleted && <Redirect to='/dashboard' />}
 			</>
 		)
 	} else {
