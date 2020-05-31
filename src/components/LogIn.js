@@ -3,7 +3,6 @@ import {Link, Redirect} from 'react-router-dom'
 import {MDBRow, MDBCol, MDBInput, MDBCard, MDBCardBody, MDBBtn} from 'mdbreact'
 import {login} from '../services/api-helper'
 
-
 function LogIn(props) {
 
   console.log('LogIn - props', props)
@@ -12,7 +11,6 @@ function LogIn(props) {
     username: '',
     password: ''
   })
-  
   const [errorAlert, setErrorAlert] = useState(false)
 
   const handleLoginChange = e => {

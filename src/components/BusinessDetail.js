@@ -332,8 +332,7 @@ function BusinessDetail(props) {
 							</form>
 							</>}
 							
-							<h1 className='reviews-header'>Reviews</h1>
-							{reviews.reverse()}
+							
 						</MDBCol>
 						<MDBCol md='4' className='detail-contact-info-col'>
 							<MDBRow className='detail-contact-info-row'>
@@ -368,6 +367,10 @@ function BusinessDetail(props) {
 							</MDBRow>
 						</MDBCol>
 					</MDBRow>
+					<MDBCol md='8'>
+						<h1 className='reviews-header'>Reviews</h1>
+						{reviews.reverse()}
+					</MDBCol>
 				</MDBContainer>
 				<ScrollToTop />
 				{imageAdded && <ScrollToTop />}
