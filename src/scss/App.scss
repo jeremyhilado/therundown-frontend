@@ -200,6 +200,13 @@
     .detail-phone-icon-border {
         border-bottom: none;
     }
+    .rating-form {
+        flex-wrap: nowrap;
+    }
+    .form-check-label {
+        position: relative;
+        left:15px;
+    }
 }
 
 @media(max-width: 375px) {

@@ -244,7 +244,7 @@ function BusinessDetail(props) {
 
 							{showReviewForm &&
 								<>Select rating:
-									<MDBFormInline>
+									<MDBFormInline className='rating-form'>
 									<MDBInput
 										checked={radio == 1 ? true : false}
 										value='1'

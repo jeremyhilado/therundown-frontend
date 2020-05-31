@@ -21,6 +21,8 @@ function Main() {
 	const [searchResults, setSearchResults] = useState([])
 	const [currentBusiness, setCurrentBusiness] = useState([])
 
+	console.log('Main - user', user)
+
 	useEffect(() => {
 		const makeApiCall = async () => {
 			const res1 = await getBusinesses(user.token)
