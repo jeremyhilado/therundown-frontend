@@ -152,7 +152,7 @@ function CreateBusiness(props) {
 									onChange={handleBusinessChange}
 									name='phone'
 								/>
-								<MDBBtn id='login-btn' color='indigo' type='submit'>Submit</MDBBtn>
+								<MDBBtn id='login-btn' color='indigo darken-3' type='submit'>Submit</MDBBtn>
 							</form>
 						</MDBCardBody>
 					</MDBCard>
@@ -160,6 +160,7 @@ function CreateBusiness(props) {
 			</MDBRow>
 			{success && <Redirect to='/dashboard' />}
 			{displayErrors && <ScrollToTop />}
+			<ScrollToTop />
 		</div>
 	)
 }

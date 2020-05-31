@@ -34,7 +34,7 @@ function Navbar() {
 
   return (
 		<>
-		<MDBNavbar color="indigo" dark expand="md" fixed='top'>
+		<MDBNavbar color='indigo darken-3' dark expand="md" fixed='top'>
 			<MDBNavbarBrand>
 				<MDBNavLink to='/dashboard'><strong className="white-text nav-title">The Rundown</strong></MDBNavLink>
 			</MDBNavbarBrand>

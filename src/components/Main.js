@@ -31,7 +31,7 @@ function Main() {
 			setImages(res3.data)
 		}
 		makeApiCall()
-	}, [])
+	}, [images])
 
     return(
 			<div>

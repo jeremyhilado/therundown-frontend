@@ -127,7 +127,7 @@ function SignUp() {
 									onChange={e => setConfirmPassword(e.target.value)}
 									value={confirmPassword}
 								/>
-								<MDBBtn id='login-btn' color='indigo' type='submit'>Submit</MDBBtn>
+								<MDBBtn id='login-btn' color='indigo darken-3' type='submit'>Submit</MDBBtn>
 							</form>
 						</MDBCardBody>
 					</MDBCard>

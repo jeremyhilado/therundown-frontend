@@ -61,7 +61,7 @@ function LogIn(props) {
                   onChange={handleLoginChange}
                   name='password'
                 />
-                <MDBBtn id='login-btn' color='indigo' type='submit'>Submit</MDBBtn>
+                <MDBBtn id='login-btn' color='indigo darken-3' type='submit'>Submit</MDBBtn>
               </form>
               <p style={{textAlign: 'center'}}>Not a member? <Link to='/signup' style={{textDecoration: 'underline'}}>Sign Up</Link></p>
             </MDBCardBody>
