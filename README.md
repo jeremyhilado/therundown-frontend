@@ -8,7 +8,7 @@ An app where users can create business listings and leave reviews about their ex
 
 ## GitHub Repo Links
 
-- [Front-end](https://github.com/jeremyhilado/yelp-clone-frontend)
+- [Front-end](https://github.com/jeremyhilado/therundown-frontend)
 - [Back-end](https://github.com/jeremyhilado/yelp-clone-backend)
 
 ## Project Schedule
