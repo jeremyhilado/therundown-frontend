@@ -24,11 +24,11 @@ function LogIn(props) {
       if(res.data) {
         props.setUser(res.data)
         localStorage.setItem('user', JSON.stringify(res.data))
-        // props.setVerified(true)
+        props.setVerified(true)
       } else {
         setErrorAlert(true)
       }
-    }).then(props.setVerified(true))
+    })
   }
 
   return (

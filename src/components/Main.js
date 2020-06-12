@@ -23,25 +23,13 @@ function Main() {
 
 	console.log('Main - user', user)
 
-	useEffect(() => {
-		const makeApiCall = async () => {
-			const res1 = await getBusinesses(user.token)
-			const res2 = await getReviews(user.token)
-			const res3 = await getImages(user.token)
-			setBusinesses(res1.data)
-			setReviews(res2.data)
-			setImages(res3.data)
-		}
-		makeApiCall()
-	}, [images])
-
     return(
 			<div>
 				<SearchContext.Provider value={{setSearchResults, setUser, setVerified}}>
 				<Switch>
 					<Route exact path='/'><LogIn setUser={setUser} setVerified={setVerified} verified={verified} /></Route>
 					<Route exact path='/signup'><SignUp /></Route>
-					<Route exact path='/dashboard'><Dashboard businesses={businesses} /></Route>
+					<Route exact path='/dashboard'><Dashboard businesses={businesses} user={user} setBusinesses={setBusinesses} setImages={setImages} setReviews={setReviews} images={images} /></Route>
 					<Route exact path='/business/:name' render={props => <BusinessDetail {...props} businesses={businesses} reviews={reviews} setReviews={setReviews} images={images} setImages={setImages} setBusinesses={setBusinesses} setCurrentBusiness={setCurrentBusiness} user={user} />} />
 					<Route exact path='/createbusiness'><CreateBusiness setBusinesses={setBusinesses} user={user} /></Route>
 					<Route exact path='/editbusiness/:name' render={props => <EditBusiness {...props} currentBusiness={currentBusiness} setBusinesses={setBusinesses} user={user} />} />

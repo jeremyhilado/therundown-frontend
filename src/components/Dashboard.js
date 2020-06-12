@@ -1,12 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBIcon, MDBRow } from 'mdbreact'
 import {Link} from 'react-router-dom'
 import Navbar from './Navbar'
+import {getBusinesses, getReviews, getImages} from '../services/api-helper'
 
 function Dashboard(props) {
 
 	console.log('Dashboard - props', props)
 
+	useEffect(() => {
+		const makeApiCall = async () => {
+			const res1 = await getBusinesses(props.user.token)
+			const res2 = await getReviews(props.user.token)
+			const res3 = await getImages(props.user.token)
+			props.setBusinesses(res1.data)
+			props.setReviews(res2.data)
+			props.setImages(res3.data)
+		}
+		makeApiCall()
+	}, [props.images])
 
 	if(props.businesses) {
 		const allBusinesses = props.businesses.map((business, i) => {
