@@ -353,7 +353,7 @@ function BusinessDetail(props) {
 									<MDBIcon icon='external-link-square-alt' size='3x' />
 								</MDBCol>
 								<MDBCol md='8' className='detail-info-col'>
-									<a href={business[0].website} target='_blank' rel="noopener noreferrer">{business[0].website}</a>
+									<a href={business[0].website} target='_blank' rel="noopener noreferrer">{business[0].website.substr(12)}</a>
 								</MDBCol>
 							</MDBRow>
 							<hr/>
